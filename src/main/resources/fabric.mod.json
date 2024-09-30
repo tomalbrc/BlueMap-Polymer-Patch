@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "id": "bmpp",
+  "version": "${version}",
+  "name": "BlueMapPolymerPatch",
+  "description": "",
+  "authors": [],
+  "contact": {},
+  "license": "MIT",
+  "icon": "bmpp-icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "de.tomalbrc.bmpp.BlueMapPolymerPatch"
+    ]
+  },
+  "mixins": [
+    "bmpp.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "minecraft": "${minecraft_version}"
+  }
+}
