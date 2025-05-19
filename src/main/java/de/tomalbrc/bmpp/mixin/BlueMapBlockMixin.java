@@ -29,7 +29,7 @@ public abstract class BlueMapBlockMixin<T extends Block<T>> {
     private void onGetBlockState(CallbackInfoReturnable<BlockState> cir) {
         ResourceLocation resourceLocation = ResourceLocation.fromNamespaceAndPath(blockState.getNamespace(), blockState.getValue());
         Map<String, String> propertyMap = blockState.getProperties();
-        net.minecraft.world.level.block.Block block = BuiltInRegistries.BLOCK.get(resourceLocation);
+        net.minecraft.world.level.block.Block block = BuiltInRegistries.BLOCK.get(resourceLocation).get().value();
         if (block instanceof PolymerBlock polymerBlock) {
             var mcState = block.defaultBlockState();
             for (Property prop: mcState.getProperties()) {
@@ -37,7 +37,7 @@ public abstract class BlueMapBlockMixin<T extends Block<T>> {
                     mcState = mcState.setValue(prop, (Comparable) prop.getValue(propertyMap.get(prop.getName())).get());
                 }
             }
-            var realState = polymerBlock.getPolymerBlockState(mcState);
+            var realState = polymerBlock.getPolymerBlockState(mcState, null);
             Map<String, String> newPropertyMap = new Object2ObjectOpenHashMap<>();
             for (Property prop: realState.getProperties()) {
                 newPropertyMap.put(prop.getName(), realState.getValue(prop).toString().toLowerCase());
